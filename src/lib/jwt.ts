@@ -19,3 +19,4 @@ export function verifyToken(token: string): UserTokenPayload {
     const verified = jwt.verify(token, secret)
     return verified as unknown as UserTokenPayload
 }
+kjkjb
