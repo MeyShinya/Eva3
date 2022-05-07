@@ -54,7 +54,7 @@ export default class AuthController {
             res.status(201).json(newUser)
         } catch (error) {
             if (error.code === 'P2002') {
-                res.status(409).json({ message: 'User alreadys exist' })
+                res.status(409).json({ message: 'User already exist' })
                 return
             }
             console.log(error)
