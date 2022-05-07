@@ -1,6 +1,7 @@
 import { Request, Response } from "express"
+import bcrypt from 'bcryptjs'
 import { generateToken } from "../lib/jwt"
-import { CreateUsertDTO } from "../models/dto/UserDTO"
+import { CreateUserDTO } from "../models/dto/UserDTO"
 import UserRepository from "../models/repositories/UserRepository"
 import { loginShema, resgisterSchema } from "../models/Validators/userSchemas"
 
@@ -30,7 +31,7 @@ export default class AuthController {
     }
 
     public readonly register = async (req: Request, res: Response) => {
-        const user = req.body as CreateUsertDTO
+        const user = req.body as CreateUserDTO
 
         try {
             await resgisterSchema.validateAsync(user)
@@ -38,8 +39,10 @@ export default class AuthController {
             res.status(400).json({ error: error.message })
         }
 
+        const hashedPassword = bcrypt.hashSync(user.password, 10)
+
         const repository = new UserRepository()
-        const newUser = await repository.create(user)
+        const newUser = await repository.create({ ...user, password: hashedPassword })
 
         res.status(201).json(newUser)
     }

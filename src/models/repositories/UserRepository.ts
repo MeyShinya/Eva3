@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { CreateUsertDTO, LoginUserDTO, updateUserDTO, UserDTO } from "../dto/UserDTO";
+import { CreateUserDTO, LoginUserDTO, updateUserDTO, UserDTO } from "../dto/UserDTO";
 
 const prisma = new PrismaClient()
 
@@ -39,7 +39,7 @@ export default class UserRepository {
         return user
     }
 
-    public readonly create = async (user: CreateUsertDTO): Promise<UserDTO> => {
+    public readonly create = async (user: CreateUserDTO): Promise<UserDTO> => {
         const newUser = await prisma.user.create({
             data: user
         })

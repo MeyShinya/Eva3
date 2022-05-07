@@ -9,11 +9,11 @@ export interface UserDTO extends BaseUserDTO {
     id: number
 }
 
-export interface CreateUsertDTO extends BaseUserDTO {
+export interface CreateUserDTO extends BaseUserDTO {
     password: string
 }
 
-export type updateUserDTO = Partial<CreateUsertDTO>
+export type updateUserDTO = Partial<CreateUserDTO>
 
 export interface LoginUserDTO extends UserDTO {
     password: string
